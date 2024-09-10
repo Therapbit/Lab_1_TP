@@ -1,39 +1,38 @@
 #pragma once
 #include "CargoCarrier.h"
+#include "Keeper.h"
+#include "List.h"
 #include <string>
 #include <iostream>
 using namespace std;
 
-
 class Car : public CargoCarrier
 {
 private:
-	int yearRelease;
-	string brandCar;
-	string modelCar;
-	string cityDelivery;
-	int timeDelivery;
-	int volumeLoad;
-
+    int yearRelease;
+    string brandCar;
+    string modelCar;
+    List cityTimeDelivery;
+    int volumeLoad;       
 public:
 
-	Car();
-	Car(int yearRelease, string brandCar, string modelCar, string cityDelivery, int timeDelivery, int volumeLoad);
-	Car(const Car& other);
-	~Car();
+
+    Car();
+    Car(string brandCar, string modelCar, int yearRelease, int volumeLoad, string city, int hour);
+    Car(const Car& other);
 
 
-	void setYearRelease(int yearRelease) { this->yearRelease = yearRelease; }
-	void setBrandCar(string brandCar) { this->brandCar = brandCar; }
-	void setModelCar(string modelCar) { this->modelCar = modelCar; }
-	void setCityDelivery(string cityDelivery) { this->cityDelivery = cityDelivery; }
-	void setTimeDelivery(int timeDelivery) { this->timeDelivery = timeDelivery; }
-	void setVolumeLoad(int volumeLoad) { this->volumeLoad = volumeLoad; }
+    void setYearRelease(int yearRelease);
+    void setBrandCar(string brandCar);
+    void setModelCar(string modelCar);
+    void setVolumeLoad(int volumeLoad);
+    void setCityTimeDelivery(string city, int hour);
 
-	int getYearRelease() { return yearRelease; }
-	string getBrandCar() { return brandCar; }
-	string getCityDelivery() { return cityDelivery; }
-	int getTimeDelivery() { return timeDelivery; }
-	int getVolumeLoad() { return volumeLoad; }
+    int getYearRelease();
+    string getBrandCar();
+    string getModelCar();
+    int getVolumeLoad();
+    List getCityTimeDelivery();
+    void print();
+    void input();
 };
-
