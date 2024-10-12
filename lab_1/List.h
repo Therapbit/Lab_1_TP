@@ -23,5 +23,6 @@ public:
 	Node& operator[](int index);
 	void print(int index);
 	Node* getHead() { return head; }
+	void setHead(Node* newHead) { head = newHead; }
 };
 

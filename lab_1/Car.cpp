@@ -1,5 +1,8 @@
 #include "Car.h"
 #include "Keeper.h"
+#include <iostream>
+using namespace std;
+
 
 
 Car::Car() : yearRelease(0), volumeLoad(0), brandCar("Unknown"), modelCar("Unknown") {
@@ -58,7 +61,8 @@ void Car::input() {
     string model;
     cin >> model;
     setModelCar(model);
-
+    
+    getchar();
     cout << "¬ведите год выпуска автомобил€:";
     int yearRelease;
     cin >> yearRelease;

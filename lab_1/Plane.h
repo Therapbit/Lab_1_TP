@@ -1,6 +1,7 @@
 #pragma once
 #include "CargoCarrier.h"
 #include "List.h"
+#include "LinkedList.h"
 #include <string>
 #include <iostream>
 using namespace std;

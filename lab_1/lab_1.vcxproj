@@ -130,6 +130,7 @@
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="CargoCarrier.cpp" />
     <ClCompile Include="Keeper.cpp" />
+    <ClCompile Include="LinkedList.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Plane.cpp" />
@@ -139,6 +140,7 @@
     <ClInclude Include="Car.h" />
     <ClInclude Include="CargoCarrier.h" />
     <ClInclude Include="Keeper.h" />
+    <ClInclude Include="LinkedList.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="Train.h" />
