@@ -61,6 +61,30 @@ int main()
             system("cls");
             break;
         }
+        case 5: {
+            //сохранение текущих данных контейнера в файл
+            system("cls");
+            string filename;
+            cout << "Введите желаемое название файла" << endl;
+            cin >> filename;
+            system("cls");
+            keeper.saveToFile(filename);//вызов функции в Кипере для сохранения данных в файл, с_str преобразует строку в char* для корректной работы функции
+            system("pause");
+            system("cls");
+            break;
+        }
+        case 6: {
+            //загрузка данных из файла
+            system("cls");
+            string filename;
+            cout << "Введите название файла" << endl;
+            cin >> filename;
+            system("cls");
+            keeper.loadFromFile(filename);
+            system("pause");
+            system("cls");
+            break;
+        }
         case 9:
             //печать всего контейнера
             system("cls");

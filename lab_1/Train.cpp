@@ -1,4 +1,5 @@
 #include "Train.h"
+#include <fstream>
 
 // Конструктор по умолчанию
 Train::Train() : nameTrain("Unknown"), yearRelease(0), amountWagon(0), volumeLoad(0)
@@ -76,4 +77,61 @@ void Train::print() {
         current = current->next;
     }
     cout << endl;
+}
+
+void Train::saveToFile(ofstream& file) {
+    file << "TRAIN" << endl;
+    CargoCarrier::saveToFile(file);
+    file << "Name:" << getNameTrain() << endl;
+    file << "Year of release:" << getYearRelease() << endl;
+    file << "Amount of wagons:" << getAmountWagon() << endl;
+    file << "Volume of load:" << getVolumeLoad() << endl;
+    List route = getRoute();
+    Node* current = route.getHead();
+    int i = 1;
+    file << "Route:";
+    while (current != nullptr) {
+        file << current->city << ", ";
+        current = current->next;
+    }
+    file << endl;
+}
+
+void Train::loadFromFile(ifstream& file) {
+    string line;
+
+    // Пропускаем заголовок "TRAIN"
+    getline(file, line);
+
+    // Чтение наименования поезда
+    getline(file, line);
+    setNameTrain(line.substr(line.find(":") + 1));
+
+    // Чтение года выпуска
+    getline(file, line);
+    setYearRelease(stoi(line.substr(line.find(":") + 1)));
+
+    // Чтение количества вагонов
+    getline(file, line);
+    setAmountWagon(stoi(line.substr(line.find(":") + 1)));
+
+    // Чтение объема перевозимого груза
+    getline(file, line);
+    setVolumeLoad(stoi(line.substr(line.find(":") + 1)));
+
+    // Чтение маршрута поездов
+
+    // Разбираем города через запятую
+    size_t start = 0;
+    size_t end = line.find(", ");
+    while (end != string::npos) {
+        route.addToTail(line.substr(start, end - start));
+        start = end + 2;  // Пропускаем запятую и пробел
+        end = line.find(", ", start);
+    }
+
+    // Добавляем последний город
+    if (start < line.size()) {
+        route.addToTail(line.substr(start));
+    }
 }

@@ -36,6 +36,8 @@ public:
 
 	void input();
 	void print();
+	void saveToFile(ofstream& file);
+	void loadFromFile(ifstream& file);
 
 };
 

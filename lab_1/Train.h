@@ -4,6 +4,7 @@
 #include "List.h"
 #include "LinkedList.h"
 #include <iostream>
+
 using namespace std;
 
 class Train :  public CargoCarrier
@@ -37,5 +38,8 @@ public:
 
 	void input();
 	void print();
+
+	void saveToFile(ofstream& file);
+	void loadFromFile(ifstream& file);
 };
 

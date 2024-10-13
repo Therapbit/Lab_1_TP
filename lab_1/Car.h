@@ -36,4 +36,7 @@ public:
     List getCityTimeDelivery();
     void print();
     void input();
+
+    void saveToFile(ofstream& file);
+    void loadFromFile(ifstream& file);
 };

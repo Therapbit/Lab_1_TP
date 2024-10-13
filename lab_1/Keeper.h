@@ -25,8 +25,8 @@ public:
 	void clearTransport();
 	void removeByName(string& n);
 
-	void saveToFile(const char* filename);
-	void loadFromFile(const char* filename);
+	void saveToFile(string filename);
+	void loadFromFile(string filename);
 
 	void printlist();
 };

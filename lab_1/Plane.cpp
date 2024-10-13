@@ -1,7 +1,7 @@
 #include "Plane.h"
 #include <iostream>
 #include <cstdlib>
-
+#include <fstream>
 using namespace std;
 // Конструктор по умолчанию
 Plane::Plane()
@@ -82,4 +82,58 @@ void Plane::print() {
         current = current->next;
     }
     cout << endl;
+}
+
+
+void Plane::saveToFile(ofstream& file) {
+    file << "PLANE" << endl;
+    CargoCarrier::saveToFile(file);
+    file << "Type:" << getTypePlane() << endl;
+    file << "Name:" << getName() << endl;
+    file << "Size:" << getSize() << endl;
+    file << "Volume of load:" << getVolumeOfLoad() << endl;
+    List cityDestination = getCityOfDestination();
+    Node* current = cityDestination.getHead();
+    int i = 1;
+    while (current != nullptr) {
+        file << i++ << "." << "City:" << current->city << ", ";
+        current = current->next;
+    }
+    file << endl;
+}
+
+
+void Plane::loadFromFile(ifstream& file) {
+    string line;
+
+    // Пропускаем заголовок "PLANE"
+    getline(file, line);
+
+    // Чтение типа самолета
+    getline(file, line);
+    setTypePlane(line.substr(line.find(":") + 1));
+
+    // Чтение наименования самолета
+    getline(file, line);
+    setName(line.substr(line.find(":") + 1));
+
+    // Чтение габаритов самолета
+    getline(file, line);
+    setSize(line.substr(line.find(":") + 1));
+
+    // Чтение объема перевозимого груза
+    getline(file, line);
+    setVolumeOfLoad(stoi(line.substr(line.find(":") + 1)));
+
+    // Чтение списка городов доставки
+
+    while (getline(file, line)) {
+        if (line.empty()) break;  // Останавливаемся, когда встречаем пустую строку
+        // Извлекаем город из строки формата "i. City: <название города>"
+        size_t pos = line.find("City:");
+        if (pos != string::npos) {
+            string city = line.substr(pos + 6);  // 6 символов для "City: "
+            cityDestination.addToTail(city);
+        }
+    }
 }

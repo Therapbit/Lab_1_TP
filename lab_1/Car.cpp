@@ -1,12 +1,12 @@
 #include "Car.h"
 #include "Keeper.h"
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 
 
 Car::Car() : yearRelease(0), volumeLoad(0), brandCar("Unknown"), modelCar("Unknown") {
-    cityTimeDelivery.addToTail("Unknown");
 }
 
 // Конструктор с параметрами
@@ -105,5 +105,61 @@ void Car::print() {
     while (current != nullptr) {
         cout << i++ << "." << "City:" << current->city << ", Hour:" << current->hour << endl;
         current = current->next;
+    }
+}
+
+
+void Car::saveToFile(ofstream& file) {
+    file << "CAR" << endl;
+    file << "Brand:" << getBrandCar() << endl;
+    file << "Model:" << getModelCar() << endl;
+    file << "Year of release:" << getYearRelease() << endl;
+    file << "Volume of load:" << getVolumeLoad() << endl;
+    List cityTimeDelivery = getCityTimeDelivery();
+    Node* current = cityTimeDelivery.getHead();
+    int i = 1;
+    while (current != nullptr) {
+        file << i++ << "." << "City:" << current->city << ", Hour:" << current->hour << endl;
+        current = current->next;
+    }
+}
+
+
+void Car::loadFromFile(ifstream& file) {
+    string line;
+
+    // Пропускаем заголовок "CAR"
+    getline(file, line);
+
+    // Чтение марки автомобиля
+    getline(file, line);
+    setBrandCar(line.substr(line.find(":") + 1));
+
+    // Чтение модели автомобиля
+    getline(file, line);
+    setModelCar(line.substr(line.find(":") + 1));
+
+    // Чтение года выпуска автомобиля
+    getline(file, line);
+    setYearRelease(stoi(line.substr(line.find(":") + 1)));
+
+    // Чтение объема перевозимого груза
+    getline(file, line);
+    setVolumeLoad(stoi(line.substr(line.find(":") + 1)));
+
+    // Чтение списка городов и времени доставки
+
+    while (getline(file, line)) {
+        if (line.empty()) break;  // Останавливаемся, если встречаем пустую строку
+
+        // Извлекаем город и часы доставки
+        size_t cityPos = line.find("City:");
+        size_t hourPos = line.find("Hour:");
+
+        if (cityPos != string::npos && hourPos != string::npos) {
+            string city = line.substr(cityPos + 5, hourPos - cityPos - 6);
+            int hour = stoi(line.substr(hourPos + 5));
+            cityTimeDelivery.addToTail(city, hour);
+        }
     }
 }

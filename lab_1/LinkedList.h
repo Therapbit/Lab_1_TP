@@ -11,10 +11,11 @@ struct LNode {
 
 class LinkedList
 {
-	private:
+private:
 	LNode* head;
 	size_t size;
-	public:
+
+public:
 	LinkedList() : head(nullptr), size(0) {};
 
 	void add(CargoCarrier* transport);
