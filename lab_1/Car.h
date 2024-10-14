@@ -10,6 +10,7 @@ using namespace std;
 class Car : public CargoCarrier
 {
 private:
+    string numberCar;
     int yearRelease;
     string brandCar;
     string modelCar;
@@ -19,7 +20,7 @@ public:
 
 
     Car();
-    Car(string brandCar, string modelCar, int yearRelease, int volumeLoad, string city, int hour);
+    Car(string brandCar, string modelCar, int yearRelease, int volumeLoad, string city, int hour, string numberCar);
     Car(const Car& other);
 
 
@@ -28,7 +29,9 @@ public:
     void setModelCar(string modelCar);
     void setVolumeLoad(int volumeLoad);
     void setCityTimeDelivery(string city, int hour);
+    void setNumberCar(string numberCar);
 
+    string getNumberCar();
     int getYearRelease();
     string getBrandCar();
     string getModelCar();
@@ -36,7 +39,8 @@ public:
     List getCityTimeDelivery();
     void print();
     void input();
-
+    void makeChange();
     void saveToFile(ofstream& file);
     void loadFromFile(ifstream& file);
+
 };

@@ -71,9 +71,9 @@ void Train::print() {
     List route = getRoute();
     Node* current = route.getHead();
     int i = 1;
-    cout << "Route:";
+    cout << "Route:\n";
     while (current != nullptr) {
-        cout << current->city << ", ";
+        cout << i++ << "." << "City:" << current->city << endl;
         current = current->next;
     }
     cout << endl;
@@ -89,9 +89,9 @@ void Train::saveToFile(ofstream& file) {
     List route = getRoute();
     Node* current = route.getHead();
     int i = 1;
-    file << "Route:";
+    file << "Route:\n";
     while (current != nullptr) {
-        file << current->city << ", ";
+        file << i++ << "." << "City:" << current->city << endl;
         current = current->next;
     }
     file << endl;
@@ -119,19 +119,77 @@ void Train::loadFromFile(ifstream& file) {
     getline(file, line);
     setVolumeLoad(stoi(line.substr(line.find(":") + 1)));
 
+
+    getline(file, line);  // Считываем строку с маршрутами
+    line = line.substr(line.find(":") + 1);  // Убираем метку "Route:"
     // Чтение маршрута поездов
 
-    // Разбираем города через запятую
-    size_t start = 0;
-    size_t end = line.find(", ");
-    while (end != string::npos) {
-        route.addToTail(line.substr(start, end - start));
-        start = end + 2;  // Пропускаем запятую и пробел
-        end = line.find(", ", start);
+    while (getline(file, line)) {
+        if (line.empty()) break;  // Останавливаемся, когда встречаем пустую строку
+        // Извлекаем город из строки формата "i. City: <название города>"
+        size_t pos = line.find("City:");
+        if (pos != string::npos) {
+            string city = line.substr(pos + 5);  // 6 символов для "City:"
+            route.addToTail(city);
+        }
     }
+}
 
-    // Добавляем последний город
-    if (start < line.size()) {
-        route.addToTail(line.substr(start));
+
+void Train::makeChange() {
+    int command = 0;
+
+    while (command != 5) {
+        cout << "Выберите какое значение вы хотите поменять\n1.Наименовние поезда\n2.Год выпуска\n3.Количество вагонов\n4.Вмещаемый объем\n5.Вернуться в меню\n";
+        cin >> command;
+        switch (command) {
+        case 1: {
+            string nameTrain;
+            system("cls");
+            cout << "Введите новое наименование поезда\nName of train:";
+            cin >> nameTrain;
+            setNameTrain(nameTrain);
+            cout << "Наименование поезда успешно изменено";
+            system("pause");
+            system("cls");
+            break;
+        }
+        case 2: {
+            int yearRelease;
+            system("cls");
+            cout << "Введите новый год выпуска поезда\nYear of release:";
+            cin >> yearRelease;
+            setYearRelease(yearRelease);
+            cout << "Год выпуска успешно изменен";
+            system("pause");
+            system("cls");
+            break;
+        }
+        case 3: {
+            int amountWagons;
+            system("cls");
+            cout << "Введите новое количество вагонов\nAmount of wagons:";
+            cin >> amountWagons;
+            setAmountWagon(amountWagons);
+            cout << "Количество вагонов успешно изменено";
+            system("pause");
+            system("cls");
+            break;
+        }
+        case 4: {
+            int volumeLoad;
+            system("cls");
+            cout << "Введите новую вмещаемость поезда\nVolume of Load:";
+            cin >> volumeLoad;
+            setVolumeLoad(volumeLoad);
+            cout << "Вмещаемость поезда успешно изменена\n";
+            system("pause");
+            system("cls");
+            break;
+        }
+        case 5: {
+            break;
+        }
+        }
     }
 }

@@ -46,7 +46,7 @@ void LinkedList::printTypeTransport(int type) const {
             current->transport->print(); 
 
         }
-        else if (dynamic_cast<Train*>(current->transport) && type == 3) {
+        else if (dynamic_cast<Car*>(current->transport) && type == 3) {
            
             current->transport->print(); 
 

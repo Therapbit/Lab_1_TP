@@ -24,7 +24,7 @@ int main()
     while (choice != 10) {
         cout << "----------------МЕНЮ----------------\n\n" << endl;
         cout << "1 - Ввод Поезда\n2 - Ввод Самолета\n3 - Ввод Машины\n";
-        cout << "4 - Удалить персонажа\n";
+        cout << "4 - Удалить транспорт\n";
         cout << "5 - Сохранить в файл\n";
         cout << "6 - Загрузить из файла\n";
         cout << "7 - Найти персонажа\n";
@@ -61,6 +61,11 @@ int main()
             system("cls");
             break;
         }
+        case 4:
+            system("cls");
+            keeper.removeTransport();
+            break;
+        
         case 5: {
             //сохранение текущих данных контейнера в файл
             system("cls");
@@ -81,6 +86,13 @@ int main()
             cin >> filename;
             system("cls");
             keeper.loadFromFile(filename);
+            system("pause");
+            system("cls");
+            break;
+        }
+        case 7: {
+            system("cls");
+            keeper.changeTransport();
             system("pause");
             system("cls");
             break;

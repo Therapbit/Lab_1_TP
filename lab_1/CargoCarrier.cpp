@@ -7,3 +7,7 @@ void CargoCarrier::saveToFile(ofstream& file) {
 
 void CargoCarrier::loadFromFile(ifstream& file) {
 }
+
+void CargoCarrier::makeChange() {
+
+}

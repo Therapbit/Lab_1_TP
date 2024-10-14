@@ -38,6 +38,6 @@ public:
 	void print();
 	void saveToFile(ofstream& file);
 	void loadFromFile(ifstream& file);
-
+	void makeChange();
 };
 

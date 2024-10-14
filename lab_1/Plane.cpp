@@ -78,7 +78,7 @@ void Plane::print() {
     Node* current = cityDestination.getHead();
     int i = 1;
     while (current != nullptr) {
-        cout << i++ << "." << "City:" << current->city << ", ";
+        cout << i++ << "." << "City:" << current->city << endl;
         current = current->next;
     }
     cout << endl;
@@ -95,8 +95,9 @@ void Plane::saveToFile(ofstream& file) {
     List cityDestination = getCityOfDestination();
     Node* current = cityDestination.getHead();
     int i = 1;
+    file << "City Destination:\n";
     while (current != nullptr) {
-        file << i++ << "." << "City:" << current->city << ", ";
+        file << i++ << "." << "City:" << current->city << endl;
         current = current->next;
     }
     file << endl;
@@ -125,6 +126,8 @@ void Plane::loadFromFile(ifstream& file) {
     getline(file, line);
     setVolumeOfLoad(stoi(line.substr(line.find(":") + 1)));
 
+    getline(file, line);  // Считываем строку с маршрутами
+    line = line.substr(line.find(":") + 1);  // Убираем метку "Route:"
     // Чтение списка городов доставки
 
     while (getline(file, line)) {
@@ -132,8 +135,67 @@ void Plane::loadFromFile(ifstream& file) {
         // Извлекаем город из строки формата "i. City: <название города>"
         size_t pos = line.find("City:");
         if (pos != string::npos) {
-            string city = line.substr(pos + 6);  // 6 символов для "City: "
+            string city = line.substr(pos + 5);  // 6 символов для "City: "
             cityDestination.addToTail(city);
+        }
+    }
+}
+
+
+void Plane::makeChange() {
+    int command = 0;
+
+    while (command != 5) {
+        cout << "Выберите какое значение вы хотите поменять\n1.Тип самолета\n2.Наименование самолета\n3.Габариты\n4.Вмещаемый объем\n5.Вернуться в меню\n";
+        cin >> command;
+        switch (command) {
+        case 1: {
+            string typePlane;
+            system("cls");
+            cout << "Введите новый тип самолета\nType of plane:";
+            cin >> typePlane;
+            setTypePlane(typePlane);
+            cout << "Тип самолета успешно изменен";
+            system("pause");
+            system("cls");
+            break;
+        }
+        case 2: {
+            string namePlane;
+            system("cls");
+            cout << "Введите новое наименование самолета\nName of Plane:";
+            cin >> namePlane;
+            setName(namePlane);
+            cout << "Наименование самолета успешно изменено";
+            system("pause");
+            system("cls");
+            break;
+        }
+        case 3: {
+            string size;
+            system("cls");
+            cout << "Введите габариты самолета\nSize:";
+            cin >> size;
+            setSize(size);
+            cout << "Габариты самолета успешно изменены";
+            system("pause");
+            system("cls");
+            break;
+        }
+        case 4: {
+            int volumeLoad;
+            system("cls");
+            cout << "Введите новую вмещаемость самолета\nVolume of Load:";
+            cin >> volumeLoad;
+            setVolumeOfLoad(volumeLoad);
+            cout << "Вмещаемость самолета успешно изменена\n";
+            system("pause");
+            system("cls");
+            break;
+        }
+        case 5: {
+            break;
+        }
         }
     }
 }
