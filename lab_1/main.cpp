@@ -19,22 +19,21 @@ int main()
     
 
     Keeper keeper;
-    int choice = 0;
+    int command = 0;
 
-    while (choice != 10) {
-        cout << "----------------МЕНЮ----------------\n\n" << endl;
+    while (command != 10) {
+        cout << "----------------МЕНЮ----------------" << endl;
         cout << "1 - Ввод Поезда\n2 - Ввод Самолета\n3 - Ввод Машины\n";
         cout << "4 - Удалить транспорт\n";
         cout << "5 - Сохранить в файл\n";
         cout << "6 - Загрузить из файла\n";
-        cout << "7 - Найти персонажа\n";
-        cout << "8 - Изменить данные персонажа\n";
+        cout << "7 - Внесение изменений\n";
         cout << "9 - Показать все содержимое контейнера\n";
         cout << "10 - Завершить программу\n";
         cout << ">>> ";
-        cin >> choice;
+        cin >> command;
 
-        switch (choice) {
+        switch (command) {
         case 1: {
             system("cls");
             getchar();

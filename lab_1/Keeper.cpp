@@ -206,8 +206,11 @@ void Keeper::changeTransport() {
         cin >> command;
         switch (command) {
         case 1: {
+            system("cls");
+            transportList.print();
             cout << "¬ведите им€ поезда:";
             cin >> nameTrain;
+            system("cls");
             while (current != nullptr) {
                 Train* train = dynamic_cast<Train*>(current->transport);
                 if (train != nullptr && train->getNameTrain() == nameTrain) {
@@ -220,8 +223,11 @@ void Keeper::changeTransport() {
             break;
         }
         case 2: {
+            system("cls");
+            transportList.print();
             cout << "¬ведите им€ самолета:";
             cin >> namePlane;
+            system("cls");
             while (current != nullptr) {
                 Plane* plane = dynamic_cast<Plane*>(current->transport);
                 if (plane != nullptr && plane->getName() == namePlane) {
@@ -235,8 +241,11 @@ void Keeper::changeTransport() {
             break;
         }
         case 3: {
+            system("cls");
+            transportList.print();
             cout << "¬ведите номер машины:";
             cin >> numberCar;
+            system("cls");
             while (current != nullptr) {
                 Car* car = dynamic_cast<Car*>(current->transport);
                 if (car != nullptr && car->getNumberCar() == numberCar) {

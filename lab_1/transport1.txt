@@ -1,0 +1,44 @@
+TRAIN
+Name:ME172
+Year of release:1993
+Amount of wagons:28
+Volume of load:439992
+Route:
+1.City:Saint-Petersburg
+2.City:Moscow
+3.City:Samara
+4.City:Tomsk
+
+PLANE
+Type:Cargo
+Name:B737NE
+Size:1234x838x200
+Volume of load:55521
+City Destination:
+1.City:Moscow
+2.City:Berlin
+3.City:New-York
+4.City:Irkutsk
+5.City:Vladivostok
+
+CAR
+number of car:M222MM22
+Brand:VAZ
+Model:2107
+Year of release:1980
+Volume of load:1
+1.City:Volgograd,, Hour:10
+2.City:Sochi,, Hour:24
+3.City:Saint-Petersburg,, Hour:1
+
+TRAIN
+Name:NN123
+Year of release:2022
+Amount of wagons:8
+Volume of load:24999
+Route:
+1.City:Pskov
+2.City:Smolensk
+3.City:Moscow
+4.City:Tomsk
+

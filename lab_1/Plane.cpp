@@ -144,9 +144,10 @@ void Plane::loadFromFile(ifstream& file) {
 
 void Plane::makeChange() {
     int command = 0;
-
-    while (command != 5) {
-        cout << "Выберите какое значение вы хотите поменять\n1.Тип самолета\n2.Наименование самолета\n3.Габариты\n4.Вмещаемый объем\n5.Вернуться в меню\n";
+    Node* current = cityDestination.getHead();
+    Node* prev = nullptr;
+    while (command != 7) {
+        cout << "Выберите какое значение вы хотите поменять\n1.Тип самолета\n2.Наименование самолета\n3.Габариты\n4.Вмещаемый объем\n5.Изменить город\n6.Добавить город\n7.Вернуться в меню\n";
         cin >> command;
         switch (command) {
         case 1: {
@@ -155,7 +156,7 @@ void Plane::makeChange() {
             cout << "Введите новый тип самолета\nType of plane:";
             cin >> typePlane;
             setTypePlane(typePlane);
-            cout << "Тип самолета успешно изменен";
+            cout << "Тип самолета успешно изменен" << endl;
             system("pause");
             system("cls");
             break;
@@ -166,7 +167,7 @@ void Plane::makeChange() {
             cout << "Введите новое наименование самолета\nName of Plane:";
             cin >> namePlane;
             setName(namePlane);
-            cout << "Наименование самолета успешно изменено";
+            cout << "Наименование самолета успешно изменено" << endl;
             system("pause");
             system("cls");
             break;
@@ -177,7 +178,7 @@ void Plane::makeChange() {
             cout << "Введите габариты самолета\nSize:";
             cin >> size;
             setSize(size);
-            cout << "Габариты самолета успешно изменены";
+            cout << "Габариты самолета успешно изменены" << endl;
             system("pause");
             system("cls");
             break;
@@ -194,6 +195,29 @@ void Plane::makeChange() {
             break;
         }
         case 5: {
+            string cityOld, cityNew;
+            cout << "Введите город, который хотите поменять:";
+            cin >> cityOld;
+            cout << "Введите новый город";
+            cin >> cityNew;
+            while (current != nullptr) {
+                if (cityOld == current->city) {
+                    current->city = cityNew;
+                }
+                prev = current;
+                current = current->next;
+            }
+            cout << "Город " << cityOld << " заменен на " << cityNew << " успешно\n";
+            break;
+        }
+        case 6: {
+            string cityNew;
+            cout << "Введите новый город, он добавится в конец списка:";
+            cin >> cityNew;
+            cityDestination.addToTail(cityNew);
+            cout << "Город " << cityNew << " успешно добавлен" << endl;
+        }
+        case 7: {
             break;
         }
         }

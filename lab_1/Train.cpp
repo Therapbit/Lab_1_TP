@@ -138,9 +138,10 @@ void Train::loadFromFile(ifstream& file) {
 
 void Train::makeChange() {
     int command = 0;
-
-    while (command != 5) {
-        cout << "Выберите какое значение вы хотите поменять\n1.Наименовние поезда\n2.Год выпуска\n3.Количество вагонов\n4.Вмещаемый объем\n5.Вернуться в меню\n";
+    Node* current = route.getHead();
+    Node* prev = nullptr;
+    while (command != 8) {
+        cout << "Выберите какое значение вы хотите поменять\n1.Наименовние поезда\n2.Год выпуска\n3.Количество вагонов\n4.Вмещаемый объем\n5.Изменение города\n6.Добавить город\n7.Удалить город\n8.Вернуться в меню\n";
         cin >> command;
         switch (command) {
         case 1: {
@@ -149,7 +150,7 @@ void Train::makeChange() {
             cout << "Введите новое наименование поезда\nName of train:";
             cin >> nameTrain;
             setNameTrain(nameTrain);
-            cout << "Наименование поезда успешно изменено";
+            cout << "Наименование поезда успешно изменено" << endl;
             system("pause");
             system("cls");
             break;
@@ -160,7 +161,7 @@ void Train::makeChange() {
             cout << "Введите новый год выпуска поезда\nYear of release:";
             cin >> yearRelease;
             setYearRelease(yearRelease);
-            cout << "Год выпуска успешно изменен";
+            cout << "Год выпуска успешно изменен" << endl;
             system("pause");
             system("cls");
             break;
@@ -171,7 +172,7 @@ void Train::makeChange() {
             cout << "Введите новое количество вагонов\nAmount of wagons:";
             cin >> amountWagons;
             setAmountWagon(amountWagons);
-            cout << "Количество вагонов успешно изменено";
+            cout << "Количество вагонов успешно изменено" << endl;
             system("pause");
             system("cls");
             break;
@@ -188,6 +189,29 @@ void Train::makeChange() {
             break;
         }
         case 5: {
+            string cityOld, cityNew;
+            cout << "Введите город, который хотите поменять:";
+            cin >> cityOld;
+            cout << "Введите новый город";
+            cin >> cityNew;
+            while (current != nullptr) {
+                if (cityOld == current->city) {
+                    current->city = cityNew;
+                }
+                prev = current;
+                current = current->next;
+            }
+            cout << "Город " << cityOld << " заменен на " << cityNew << " успешно\n";
+            break;
+        }
+        case 6: {
+            string cityNew;
+            cout << "Введите новый город, он добавится в конец списка:";
+            cin >> cityNew;
+            route.addToTail(cityNew);
+            cout << "Город " << cityNew << " успешно добавлен" << endl;
+        }
+        case 8: {
             break;
         }
         }

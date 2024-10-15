@@ -112,6 +112,7 @@ void Car::print() {
         cout << i++ << "." << "City:" << current->city << ", Hour:" << current->hour << endl;
         current = current->next;
     }
+    cout << endl;
 }
 
 
@@ -129,6 +130,7 @@ void Car::saveToFile(ofstream& file) {
         file << i++ << "." << "City:" << current->city << ", Hour:" << current->hour << endl;
         current = current->next;
     }
+    file << endl;
 }
 
 
@@ -176,9 +178,10 @@ void Car::loadFromFile(ifstream& file) {
 
 void Car::makeChange() {
     int command = 0;
-
-    while (command != 6) {
-        cout << "Выберите какое значение вы хотите поменять\n1.Номер машины\n2.Марку машины\n3.Модель машины\n4.Год выпуска\n5.Вмещаемый объем\n6.Вернуться в меню\n";
+    Node* current = cityTimeDelivery.getHead();
+    Node* prev = nullptr;
+    while (command != 8) {
+        cout << "Выберите какое значение вы хотите поменять\n1.Номер машины\n2.Марку машины\n3.Модель машины\n4.Год выпуска\n5.Вмещаемый объем\n6.Изменить город и время доставки до него\n7.Добавить город и время доставки до него\n8.Вернуться в меню\n";
         cin >> command;
         switch (command) {
         case 1: {
@@ -187,7 +190,7 @@ void Car::makeChange() {
             cout << "Введите новый номер машины\nNumber of Car:";
             cin >> numberCar;
             setNumberCar(numberCar);
-            cout << "Номер машины успешно изменен";
+            cout << "Номер машины успешно изменен" << endl;
             system("pause");
             system("cls");
             break;
@@ -198,7 +201,7 @@ void Car::makeChange() {
             cout << "Введите новую марку машины\nBrand:";
             cin >> brandCar;
             setBrandCar(brandCar);
-            cout << "Марка машины успешно изменена";
+            cout << "Марка машины успешно изменена" << endl;
             system("pause");
             system("cls");
             break;
@@ -209,7 +212,7 @@ void Car::makeChange() {
             cout << "Введите новую модель машины\nModel:";
             cin >> modelCar;
             setModelCar(modelCar);
-            cout << "Модель машины успешно изменена";
+            cout << "Модель машины успешно изменена" << endl;
             system("pause");
             system("cls");
             break;
@@ -220,7 +223,7 @@ void Car::makeChange() {
             cout << "Введите новый год выпуска машины\nYear of release:";
             cin >> yearRelease;
             setYearRelease(yearRelease);
-            cout << "Год выпуска машины успешно изменен";
+            cout << "Год выпуска машины успешно изменен" << endl;
             system("pause");
             system("cls");
             break;
@@ -237,6 +240,36 @@ void Car::makeChange() {
             break;
         }
         case 6: {
+            string cityOld, cityNew;
+            int hour;
+            cout << "Введите город, который хотите поменять:";
+            cin >> cityOld;
+            cout << "Введите новый город:";
+            cin >> cityNew;
+            cout << "Введите часы доставки до него:";
+            cin >> hour;
+            while (current != nullptr) {
+                if (cityOld == current->city) {
+                    current->city = cityNew;
+                    current->hour = hour;
+                }
+                prev = current;
+                current = current->next;
+            }
+            cout << "Город " << cityOld << " заменен на " << cityNew << " успешно\n";
+            break;
+        }
+        case 7: {
+            string cityNew;
+            cout << "Введите новый город, он добавится в конец списка:";
+            cin >> cityNew;
+            int hour;
+            cout << "Введите количество часов доставки до него:";
+            cin >> hour;
+            cityTimeDelivery.addToTail(cityNew, hour);
+            cout << "Город " << cityNew << " успешно добавлен" << endl;
+        }
+        case 8: {
             break;
         }
         }
